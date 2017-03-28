@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/VRScenes/Scenes/Maze.unity
+- path: Assets/VRScenes/Scenes/FlyerScene/Flyer.unity
   isLoaded: 1
   isActive: 1

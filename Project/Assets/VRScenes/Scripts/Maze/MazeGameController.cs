@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Maze
@@ -127,6 +128,7 @@ namespace VRStandardAssets.Maze
             m_DestinationMarker.Hide();
 
             // If the player won...
+           int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             if (m_Win)
             {
                 // ... play the win particles and audio.
@@ -138,6 +140,8 @@ namespace VRStandardAssets.Maze
 
                 // Wait for the win UI to fade in.
                 yield return StartCoroutine (m_WinFader.InteruptAndFadeIn ());
+
+                SceneManager.LoadScene(nextSceneIndex);
             }
             else
             {

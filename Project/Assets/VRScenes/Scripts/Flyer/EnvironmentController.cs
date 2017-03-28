@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
+using VRStandardAssets.Flyer;
+using VRStanderdAssets.Flyer;
 
 namespace VRStandardAssets.Flyer
 {
@@ -14,13 +16,14 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private float m_LetterSpwanFrequency = 3f;         // the time between letters spawning in seconds.
         [SerializeField] private float m_RingSpawnFrequency = 10f;          // The time between rings spawning in seconds.
         [SerializeField] private int m_InitialAsteroidCount = 10;           // The number of asteroids present at the start.
-        [SerializeField] private int m_InitialLetterCount = 1;             // The number of letters present at the start.
+        [SerializeField] private int m_InitialLetterCount = 10;             // The number of letters present at the start.
         [SerializeField] private float m_AsteroidSpawnZoneRadius = 120f;    // The radius of the sphere in which the asteroids spawn.
         [SerializeField] private float m_LetterSpwanZoneRadius = 120f;      // The radius of the sphere in which the letters spawn.
         [SerializeField] private float m_RingSpawnZoneRadius = 50f;         // The radius of the sphere in which the rings spawn.
         [SerializeField] private float m_SpawnZoneDistance = 500f;          // The distance from the camera of the spawn spheres.
         [SerializeField] private ObjectPool m_AsteroidObjectPool;           // The object pool that stores the asteroids.
         [SerializeField] private ObjectPool m_AsteroidExplosionObjectPool;  // The object pool that stores the expolosions made when asteroids are hit.
+        [SerializeField] private ObjectPool m_LetterRemovalObjectPool;      // The object pool that stores the removal of letters when hte letters are hit.
         [SerializeField] private ObjectPool m_RingObjectPool;               // The object pool that stores the rings.
         [SerializeField] private ObjectPool m_LetterObjectPool;             // The object pool that sores the letters.
         [SerializeField] private Transform m_Cam;                           // Reference to the camera's position.
@@ -28,7 +31,7 @@ namespace VRStandardAssets.Flyer
 
         private List<Ring> m_Rings;                                         // Collection of all the currently unpooled rings.
         private List<Asteroid> m_Asteroids;                                 // Collection of all the currently unpooled asteroids.
-        private List<VRStanderdAssets.Flyer.Letter> m_Letters;              // Collection of all the currently unpooled Letters.
+        private List<Letter> m_Letters;                                     // Collection of all the currently unpooled Letters.
         
         private bool m_Spawning;                                            // Whether the environment should keep spawning rings and asteroids.
 
@@ -39,7 +42,7 @@ namespace VRStandardAssets.Flyer
             // Create new empty lists for the rings and asteroids.
             m_Rings = new List<Ring>();
             m_Asteroids = new List<Asteroid>();
-            m_Letters = new List<VRStanderdAssets.Flyer.Letter>();
+            m_Letters = new List<Letter>();
 
             // Spawn all the starting asteroids.
             for (int i = 0; i < m_InitialAsteroidCount; i++)
@@ -48,10 +51,10 @@ namespace VRStandardAssets.Flyer
             }
 
             // Spawn all the starting Letters.
-            for (int i = 0; i < m_InitialLetterCount;i++)
-            {
-                SpawnLetter();
-            }
+          //  for (int i = 0; i < m_InitialLetterCount;i++)
+          //  {
+          //      SpawnLetter();
+          //  }
             
             // Restart the score and set the score's type to be FLYER
             SessionData.Restart();
@@ -63,7 +66,7 @@ namespace VRStandardAssets.Flyer
             // Start spawning asteroids and rings.
             StartCoroutine (SpawnAsteroidRoutine ());
             StartCoroutine (SpawnRingRoutine ());
-            StartCoroutine(SpawnLetterRoutine());
+            //StartCoroutine(SpawnLetterRoutine());
         }
 
 
@@ -84,10 +87,10 @@ namespace VRStandardAssets.Flyer
                 HandleRingRemove (m_Rings[0]);
             }
 
-            while (m_Letters.Count >0)
-            {
-                HandleLetterRemoval(m_Letters[0]);
-            }
+           // while (m_Letters.Count >0)
+           // {
+           //     HandleLetterRemoval(m_Letters[0]);
+          //  }
         }
 
 
@@ -121,6 +124,7 @@ namespace VRStandardAssets.Flyer
             asteroid.OnAsteroidHit += HandleAsteroidHit;
         }
 
+        /*
         private IEnumerator SpawnLetterRoutine()
         {
             // While the environment is spawning, spawn an asteroid and wait for another one.
@@ -131,7 +135,9 @@ namespace VRStandardAssets.Flyer
             }
             while (m_Spawning);
         }
+        */
 
+            /*
 
         private void SpawnLetter()
         {
@@ -143,15 +149,14 @@ namespace VRStandardAssets.Flyer
             letterGameObject.transform.position = letterPosition;
 
             // Get the letter component and add it to the collection.
-            VRStanderdAssets.Flyer.Letter letter = letterGameObject.GetComponent<VRStanderdAssets.Flyer.Letter>();
+            Letter letter = letterGameObject.GetComponent<Letter>();
             m_Letters.Add(letter);
 
             // Subscribe to the letter events.
-          // letter.OnLetterRemovalDistance += HandleLetterRemoval;
-         //  letter.OnLetterHit += HandleLetterHit;
+          // letter.onLetterRemovalDistance += HandleLetterRemoval;
+           //letter.onLetterHit += HandleLetterHit;
         }
-
-
+        */
 
         private IEnumerator SpawnRingRoutine ()
         {
@@ -216,11 +221,12 @@ namespace VRStandardAssets.Flyer
             asteroidExplosion.OnExplosionEnded += HandleExplosionEnded;
         }
 
-        private void HandleLetterRemoval(VRStanderdAssets.Flyer.Letter letter)
+        /*
+        private void HandleLetterRemoval(Letter letter)
         {
             // Only one of HandleAsteroidRemoval and HandleAsteroidHit should be called so unsubscribe both.
-            letter.OnLetterRemovalDistance -= HandleLetterRemoval;
-            letter.OnLetterHit -= HandleLetterHit;
+            letter.onLetterRemovalDistance -= HandleLetterRemoval;
+            letter.onLetterHit -= HandleLetterHit;
 
             // Remove the asteroid from the collection.
             m_Letters.Remove(letter);
@@ -228,24 +234,28 @@ namespace VRStandardAssets.Flyer
             // Return the asteroid to its object pool.
             m_LetterObjectPool.ReturnGameObjectToPool(letter.gameObject);
         }
+        */
 
+            /*
 
-        private void HandleLetterHit(VRStanderdAssets.Flyer.Letter letter)
+        private void HandleLetterHit(Letter letter)
         {
             // Remove the asteroid when it's hit.
             HandleLetterRemoval(letter);
 
             // Get an explosion from the object pool and put it at the asteroids position.
-            GameObject explosion = m_AsteroidExplosionObjectPool.GetGameObjectFromPool();
-            explosion.transform.position = letter.transform.position;
+            GameObject hit = m_LetterRemovalObjectPool.GetGameObjectFromPool();
+            hit.transform.position = letter.transform.position;
 
             // Get the asteroid explosion component and restart it.
-            AsteroidExplosion asteroidExplosion = explosion.GetComponent<AsteroidExplosion>();
-            asteroidExplosion.Restart();
+
+           LetterRemoval letterRemoval = hit.GetComponent<LetterRemoval>();
+           letterRemoval.Restart();
 
             // Subscribe to the asteroid explosion's event.
-            asteroidExplosion.OnExplosionEnded += HandleExplosionEnded;
+            letterRemoval.OnRemovalEnded += HandleExplosionEnded;
         }
+        */
 
 
         private void HandleExplosionEnded(AsteroidExplosion explosion)
@@ -257,7 +267,14 @@ namespace VRStandardAssets.Flyer
             m_AsteroidExplosionObjectPool.ReturnGameObjectToPool (explosion.gameObject);
         }
 
+        /*
+        private void HandleRemovalEnded(LetterRemoval remove)
+        {
+            remove.onRemovalEnded -= HandleRemovalEnded;
 
+            m_LetterRemovalObjectPool.ReturnGameObjectToPool(remove.gameObject);
+        }
+        */
         private void HandleRingRemove(Ring ring)
         {
             // Now the ring has been removed, unsubscribe from the event.

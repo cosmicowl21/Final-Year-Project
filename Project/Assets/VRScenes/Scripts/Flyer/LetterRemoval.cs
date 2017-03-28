@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using VRStandardAssets.Flyer;
+
 namespace VRStanderdAssets.Flyer
 { 
     // This script looks after the explosion after a letter has been hit.
@@ -11,9 +13,10 @@ public class LetterRemoval : MonoBehaviour
 
         private ParticleSystem[] m_ParticleSystems;                         // The particle systems for all the explosion and their children.
         private float m_Duration;                                           // The longest duration of all the particle systems.                
-            
-	// Use this for initialization
-	void Awake ()
+        internal Action<AsteroidExplosion> OnRemovalEnded;
+
+        // Use this for initialization
+        void Awake ()
     {
             // try and find all the particle systems 
             m_ParticleSystems = GetComponentsInChildren<ParticleSystem>(true);

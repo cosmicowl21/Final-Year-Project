@@ -24,6 +24,18 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private InputWarnings m_InputWarnings;                             // This needs to know when to show different warnings.
         [SerializeField] private VRCameraFade m_CameraFade;                                 // This is used to fade out and back in again as the game starts.
         [SerializeField] private SelectionRadial m_SelectionRadial;                         // Used to restart the game.
+        /*
+        string[,,,,,,,,,,,,,,,,,,,,,,,,,] letters = new string['A','B','C','D','E',
+                                                               'F','G','H','I','J',
+                                                               'K','L','M','N','O',
+                                                               'P','Q','R','S','T',
+                                                               'U','V','W','X','Y','Z'];
+
+        string[,,,,] word1 = new string['S','P','A','C','E'];
+       // char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+        string[] words = new string [20];
+        */
+
         
 
         private float m_EndTime;                                                            // The time at the point the game should end.
@@ -119,7 +131,20 @@ namespace VRStandardAssets.Flyer
             m_IsGameRunning = false;
         }
 
+        /*
+        void OnTriggerEnter(Collider letter)
+        {
+            // if the game object we intersect has the tag Letters assigned to it 
+            if (letter.gameObject.CompareTag("Letters"))
+            {
+                // make the letter game object inactive to make it dissapear
+                letter.gameObject.SetActive(false);
 
+
+
+            }
+        }
+        */
         private IEnumerator EndPhase ()
         {
             // Wait for the camera to fade out.

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using VRStandardAssets.Common;
+using VRStandardAssets.Flyer;
 using Random = UnityEngine.Random;
 
 namespace VRStanderdAssets.Flyer
@@ -10,9 +11,9 @@ public class Letter : MonoBehaviour
  {
         // Event triggers for the Letters
         public event Action<Letter> onLetterRemovalDistance;                   // This event triggers when the word if far enoug behind the camera
-        public event Action<Letter> onLetterCollide;                           // This event triggers when the ship hits the Letter.   
+        public event Action<Letter> onLetterHit;                           // This event triggers when the ship hits the Letter.   
 
-        // Setting up all the values for the letters/ words
+        // Setting up all the values for the letters
         [SerializeField] private float m_LettersMinSize = 10f;                 // The Miniuim ammount the leters can be scaled up. 
         [SerializeField] private float m_LettersMaxSize = 20f;                // The Maxiuim ammount the leters can be scaled up. 
         [SerializeField] private float m_MinSpeed = 0f;                   // The Miniuim speed that the letter can move towards the camera 
@@ -22,6 +23,7 @@ public class Letter : MonoBehaviour
 
         // setting up the references to diffrent objects 
         private Rigidbody m_RigidBody;                                 // reference to the word rigid body, used to move and rotate it.
+        private FlyerHealthController m_FlyerHealthController;      // Reference to the flyer's health script, used to damage it.
         private GameObject m_Flyer;                                    // Referance to the flyer its self.
         private Transform m_Camera;                                    // Referance to the camera
         private float m_Speed;                                         // How fast the letters will move towards the camera.
@@ -30,18 +32,26 @@ public class Letter : MonoBehaviour
 
         private const float k_RemovalDistance = 50f;                    // How far behind the camera the letter can go before being destroyed.
 
-        public Action<Letter> OnLetterRemovalDistance { get; internal set; }
-        public Action<Letter> OnLetterHit { get; internal set; }
+       // public Action<Letter> OnLetterRemovalDistance { get; internal set; }
+       // public Action<Letter> OnLetterHit { get; internal set; }
 
         void Awake ()
         {
             m_RigidBody = GetComponent<Rigidbody>();
+
+            m_FlyerHealthController = FindObjectOfType<FlyerHealthController>();
+            m_Flyer = m_FlyerHealthController.gameObject;
+
             m_Camera = Camera.main.transform;
         }
 	
-	// Update is called once per frame
+	
       private void Start ()
       {
+            // set a random scale for the letters
+            float scaleMultipler = Random.Range(m_LettersMinSize, m_LettersMaxSize);
+            transform.localScale = new Vector3(scaleMultipler, scaleMultipler, scaleMultipler);
+
             // set a random rotation for the letters of the word
             transform.rotation = Random.rotation;
 
@@ -49,8 +59,8 @@ public class Letter : MonoBehaviour
             m_Speed = Random.Range(m_MinSpeed, m_MaxSpeed);
 
             // set up a random spin for the leters
-            m_RotationAxis = Random.insideUnitSphere;
-            m_RotationSpeed = Random.Range(m_MinRotationSpeed, m_MaxRotationSpeed);
+           // m_RotationAxis = Random.insideUnitSphere;
+           // m_RotationSpeed = Random.Range(m_MinRotationSpeed, m_MaxRotationSpeed);
       }
 
     private void Update()
@@ -82,13 +92,13 @@ public class Letter : MonoBehaviour
     {
             // ensure the events are completly removed when the letter is destroyed
             onLetterRemovalDistance = null;
-            onLetterCollide = null;
+            onLetterHit = null;
     }
     
     public void hit()
     {
-            if (onLetterCollide != null)
-                onLetterCollide(this);
+            if (onLetterHit != null)
+                onLetterHit(this);
     }
 }       
 

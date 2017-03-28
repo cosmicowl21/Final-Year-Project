@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace VRStandardAssets.Common
 {
@@ -10,15 +11,12 @@ namespace VRStandardAssets.Common
         public enum GameType
         {
             FLYER,
-            SHOOTER180,
-            SHOOTER360
+          
         };
 
 
         private const string k_FlyerData = "flyerData";             // These are the names given to PlayerPrefs based on game type.
-        private const string k_Shooter180 = "shooter180Data";
-        private const string k_Shooter360 = "shooter360Data";
-
+       
 
         private static int s_HighScore;                             // Used to store the highscore for the current game type.
         private static int s_Score;                                 // Used to store the current game's score.
@@ -36,14 +34,6 @@ namespace VRStandardAssets.Common
             {
                 case GameType.FLYER:
                     s_CurrentGame = k_FlyerData;
-                    break;
-
-                case GameType.SHOOTER180:
-                    s_CurrentGame = k_Shooter180;
-                    break;
-
-                case GameType.SHOOTER360:
-                    s_CurrentGame = k_Shooter360;
                     break;
 
                 default:
@@ -77,12 +67,24 @@ namespace VRStandardAssets.Common
             return PlayerPrefs.GetInt(s_CurrentGame, 0);
         }
 
-
+        static int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         private static void CheckHighScore()
         {
             // If the current score is greater than the high score then set the high score.
             if (s_Score > s_HighScore)
                 SetHighScore();
+
+            if (s_Score == 900)
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+
+            }
+
+            if (s_Score == 1300)
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+            }
+
         }
 
 
@@ -99,5 +101,11 @@ namespace VRStandardAssets.Common
             PlayerPrefs.SetInt(s_CurrentGame, s_Score);
             PlayerPrefs.Save();
         }
+       
+        private static void CheckScore()
+        {
+
+        }
+
     }
 }
