@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace VRStandardAssets.Utils
 {
-    // This class ensures that the UI (such as the reticle and selection bar)
-    // are set up correctly.
+   /*
+    * This class ensures that the UI (such as the reticle and selection bar)
+    * are set up correctly.
+    */
     public class VRCameraUI : MonoBehaviour
     {
         [SerializeField] private Canvas m_Canvas;       // Reference to the canvas containing the UI.

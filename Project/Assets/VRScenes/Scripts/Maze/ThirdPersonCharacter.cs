@@ -7,30 +7,33 @@ namespace VRStandardAssets.Maze
     [RequireComponent(typeof(Animator))]
     public class ThirdPersonCharacter : MonoBehaviour
     {
-        [SerializeField] float m_MovingTurnSpeed = 360;
-        [SerializeField] float m_StationaryTurnSpeed = 180;
-        [SerializeField] float m_JumpPower = 12f;
+        [SerializeField] float m_MovingTurnSpeed = 360;                                                     // Set the moving speed of the character
+        [SerializeField] float m_StationaryTurnSpeed = 180;                                                 // Set the turning speed of the character
+        [SerializeField] float m_JumpPower = 12f;                                                           // Set the jump force of te character
         [Range(1f, 4f)]
-        [SerializeField] float m_GravityMultiplier = 2f;
-        [SerializeField] float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-        [SerializeField] float m_MoveSpeedMultiplier = 1f;
-        [SerializeField] float m_AnimSpeedMultiplier = 1f;
-        [SerializeField] float m_GroundCheckDistance = 0.1f;
+        [SerializeField] float m_GravityMultiplier = 2f;                                                    // Set the force of Gtravity in the game
+        [SerializeField] float m_RunCycleLegOffset = 0.2f;                                                  // move the character to the off set of the legs
+        [SerializeField] float m_MoveSpeedMultiplier = 1f;                                                  // How fast the character moves on screen                                
+        [SerializeField] float m_AnimSpeedMultiplier = 1f;                                                  // animate the shot of the turret
+        [SerializeField] float m_GroundCheckDistance = 0.1f;                                                // how far away from te ground we are
 
+        // declaring all of my varibales
         Rigidbody m_Rigidbody;
         Animator m_Animator;
+
         bool m_IsGrounded;
         float m_OrigGroundCheckDistance;
         const float k_Half = 0.5f;
         float m_TurnAmount;
         float m_ForwardAmount;
+
         Vector3 m_GroundNormal;
         float m_CapsuleHeight;
         Vector3 m_CapsuleCenter;
         CapsuleCollider m_Capsule;
         bool m_Crouching;
 
-
+        // when the game starts colct the required data form unity
         void Start()
         {
             m_Animator = GetComponent<Animator>();
@@ -39,10 +42,10 @@ namespace VRStandardAssets.Maze
             m_CapsuleHeight = m_Capsule.height;
             m_CapsuleCenter = m_Capsule.center;
 
+            // checking everythig we stop
             m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             m_OrigGroundCheckDistance = m_GroundCheckDistance;
         }
-
 
         public void Move(Vector3 move, bool crouch, bool jump)
         {
@@ -75,7 +78,6 @@ namespace VRStandardAssets.Maze
             // send input and other state parameters to the animator
             UpdateAnimator(move);
         }
-
 
         void ScaleCapsuleForCrouching(bool crouch)
         {
@@ -115,7 +117,6 @@ namespace VRStandardAssets.Maze
             }
         }
 
-
         void UpdateAnimator(Vector3 move)
         {
             // update the animator parameters
@@ -153,7 +154,6 @@ namespace VRStandardAssets.Maze
             }
         }
 
-
         void HandleAirborneMovement()
         {
             // apply extra gravity from multiplier:
@@ -162,7 +162,6 @@ namespace VRStandardAssets.Maze
 
             m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
         }
-
 
         void HandleGroundedMovement(bool crouch, bool jump)
         {
@@ -176,14 +175,12 @@ namespace VRStandardAssets.Maze
                 m_GroundCheckDistance = 0.1f;
             }
         }
-
         void ApplyExtraTurnRotation()
         {
             // help the character turn faster (this is in addition to root rotation in the animation)
             float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
             transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
         }
-
 
         public void OnAnimatorMove()
         {
@@ -198,7 +195,6 @@ namespace VRStandardAssets.Maze
                 m_Rigidbody.velocity = v;
             }
         }
-
 
         void CheckGroundStatus()
         {

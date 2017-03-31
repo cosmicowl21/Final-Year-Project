@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace VRStandardAssets.Utils
 {
-    // This is a simple object pooling script that
-    // allows for random variation in prefabs.
+   /*
+    * This is a simple object pooling script that
+    * allows for random variation in prefabs.
+    */
     public class ObjectPool : MonoBehaviour
     {
         [SerializeField] private GameObject[] m_Prefabs;            // These are prefabs which are all variations of the same (for example various asteroids).
         [SerializeField] private int m_NumberInPool;                // The number of prefabs to be initially instanced for the pool.
 
-
         private List<GameObject> m_Pool = new List<GameObject> ();  // The list of instantiated prefabs making up the pool.
-
 
         private void Awake ()
         {
@@ -22,7 +22,6 @@ namespace VRStandardAssets.Utils
                 AddToPool ();
             }
         }
-
 
         private void AddToPool ()
         {
@@ -39,7 +38,6 @@ namespace VRStandardAssets.Utils
             // Add the instance to the pool for later use.
             m_Pool.Add (instance);
         }
-
 
         public GameObject GetGameObjectFromPool ()
         {
@@ -62,7 +60,6 @@ namespace VRStandardAssets.Utils
             // Return the unpooled instance.
             return ret;
         }
-
 
         public void ReturnGameObjectToPool (GameObject go)
         {

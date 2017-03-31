@@ -4,8 +4,10 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Utils
 {
-    // This script is to make the content of a Text
-    // component different depending on the platform.
+   /*
+    * This script is to make the content of a Text
+    * component different depending on the platform.
+    */
     public class PlatformDependentText : MonoBehaviour
     {
         // This class is used to group together the platform and text specific to it.

@@ -3,29 +3,41 @@ using UnityEngine.SceneManagement;
 
 namespace VRStandardAssets.Common
 {
-    // This class is used to keep score during a game and save
-    // the highscores to PlayerPrefs.
+   /*
+    * This class is used to keep score during a game and save
+    * the highscores to PlayerPrefs.
+    */
     public static class SessionData
     {
         // This enum shows all the types of games that use scores.
         public enum GameType
         {
             FLYER,
-          
+            MAZE,
         };
 
-
         private const string k_FlyerData = "flyerData";             // These are the names given to PlayerPrefs based on game type.
-       
-
+        private const string k_MazeData = "MazeData";
         private static int s_HighScore;                             // Used to store the highscore for the current game type.
         private static int s_Score;                                 // Used to store the current game's score.
         private static string s_CurrentGame;                        // The name of the current game type.
 
-
-        public static int HighScore { get { return s_HighScore; } }
-        public static int Score { get { return s_Score; } }
-
+        // returns the original higscore to be stored
+        public static int HighScore
+        {
+            get
+            {
+                return s_HighScore;
+            }
+        }
+        // returns the current score to be stored
+        public static int Score
+        {
+            get
+            {
+                return s_Score;
+            }
+        }
 
         public static void SetGameType(GameType gameType)
         {
@@ -36,14 +48,16 @@ namespace VRStandardAssets.Common
                     s_CurrentGame = k_FlyerData;
                     break;
 
+                case GameType.MAZE:
+                    s_CurrentGame = k_MazeData;
+                    break;
+
                 default:
                     Debug.LogError("Invalid GameType");
                     break;
             }
-
             Restart();
         }
-
 
         public static void Restart()
         {
@@ -52,14 +66,12 @@ namespace VRStandardAssets.Common
             s_HighScore = GetHighScore();
         }
 
-
         public static void AddScore(int score)
         {
             // Add to the current score and check if the high score needs to be set.
             s_Score += score;
             CheckHighScore();
         }
-
 
         public static int GetHighScore()
         {
@@ -73,20 +85,7 @@ namespace VRStandardAssets.Common
             // If the current score is greater than the high score then set the high score.
             if (s_Score > s_HighScore)
                 SetHighScore();
-
-            if (s_Score == 900)
-            {
-                SceneManager.LoadScene(nextSceneIndex);
-
-            }
-
-            if (s_Score == 1300)
-            {
-                SceneManager.LoadScene(nextSceneIndex);
-            }
-
-        }
-
+       }
 
         private static void SetHighScore()
         {
@@ -106,6 +105,5 @@ namespace VRStandardAssets.Common
         {
 
         }
-
     }
 }

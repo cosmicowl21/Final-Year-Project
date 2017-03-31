@@ -14063,7 +14063,7 @@ MonoBehaviour:
   m_Prefabs:
   - {fileID: 187036, guid: d7e9dc2247ea00e41bea6d748384a854, type: 2}
   - {fileID: 110840, guid: a2c05570af63bca4db1a0cd619539938, type: 2}
-  m_NumberInPool: 26
+  m_NumberInPool: 100
 --- !u!1 &2146456704
 GameObject:
   m_ObjectHideFlags: 0
@@ -14104,7 +14104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f0c31f9219c942b19fdcd1e08a354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AsteroidSpawnFrequency: 0.8
+  m_AsteroidSpawnFrequency: 0.1
   m_LetterSpwanFrequency: 3
   m_RingSpawnFrequency: 3
   m_InitialAsteroidCount: 10

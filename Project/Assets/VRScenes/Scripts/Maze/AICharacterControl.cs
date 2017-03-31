@@ -4,18 +4,27 @@ using VRStandardAssets.Maze;
 
 namespace VRStandardAssets.Maze
 {
+    // these are fixes 
     [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class AICharacterControl : MonoBehaviour
     {
-        public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // Navmesh agent required for the path finding
-        public ThirdPersonCharacter character { get; private set; } // Character we are controlling
-
+        // Navagition Mesh agent required for the path finding
+        public UnityEngine.AI.NavMeshAgent agent
+        {
+            get;
+            private set;
+        }
+        // The character we are controlling
+        public ThirdPersonCharacter character
+        {
+            get;
+            private set;
+        }             
 
         private Rigidbody m_Rigidbody;
         private Player m_Player;
         private Vector3 m_TargetPosition;
-
 
         private void Start()
         {

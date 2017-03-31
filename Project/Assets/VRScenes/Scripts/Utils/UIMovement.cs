@@ -2,10 +2,12 @@ using UnityEngine;
 
 namespace VRStandardAssets.Utils
 {
-    // This class is used to move UI elements in ways that are
-    // generally useful when using VR, specifically looking at
-    // the camera and rotating so they're always in front of
-    // the camera.
+   /*
+    * This class is used to move UI elements in ways that are
+    * generally useful when using VR, specifically looking at
+    * the camera and rotating so they're always in front of
+    * the camera.
+    */
     public class UIMovement : MonoBehaviour
     {
         [SerializeField] private bool m_LookatCamera = true;    // Whether the UI element should rotate to face the camera.

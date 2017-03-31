@@ -5,10 +5,12 @@ using System;
 
 namespace VRStandardAssets.Utils
 {
-    // This class is used to control a radial bar that fills
-    // up as the user holds down the Fire1 button.  When it has
-    // finished filling it triggers an event.  It also has a
-    // coroutine which returns once the bar is filled.
+   /*
+    * This class is used to control a radial bar that fills
+    * up as the user holds down the Fire1 button.  When it has
+    * finished filling it triggers an event.  It also has a
+    * coroutine which returns once the bar is filled.
+    */
     public class SelectionRadial : MonoBehaviour
     {
         public event Action OnSelectionComplete;                                                // This event is triggered when the bar has filled.

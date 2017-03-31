@@ -75,12 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\VRAssets\Scripts\VRDeviceManager.cs" />
-    <Compile Include="Assets\VRAssets\Scripts\VREyeRaycaster.cs" />
-    <Compile Include="Assets\VRAssets\Scripts\VRFPSCounter.cs" />
-    <Compile Include="Assets\VRAssets\Scripts\VRInput.cs" />
-    <Compile Include="Assets\VRAssets\Scripts\VRInteractiveItem.cs" />
-    <Compile Include="Assets\VRAssets\Scripts\VRTrackingReset.cs" />
     <Compile Include="Assets\VRScenes\Scripts\Common\SessionData.cs" />
     <Compile Include="Assets\VRScenes\Scripts\Examples\ExampleInteractiveItem.cs" />
     <Compile Include="Assets\VRScenes\Scripts\Examples\ExampleRenderScale.cs" />
@@ -130,9 +124,14 @@
     <Compile Include="Assets\VRScenes\Scripts\Utils\UITint.cs" />
     <Compile Include="Assets\VRScenes\Scripts\Utils\VRCameraFade.cs" />
     <Compile Include="Assets\VRScenes\Scripts\Utils\VRCameraUI.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VRDeviceManager.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VREyeRaycaster.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VRFPSCounter.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VRInput.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VRInteractiveItem.cs" />
+    <Compile Include="Assets\VRScenes\Scripts\VRScripts\VRTrackingReset.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\Android\Assets\OSIG_Readme.txt" />
     <None Include="Assets\VRScenes\Fonts\LICENSE.txt" />
     <None Include="Assets\VRScenes\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\VRScenes\Shaders\SeparableAlpha.shader" />

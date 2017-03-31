@@ -123,7 +123,6 @@
     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\Android\Assets\OSIG_Readme.txt" />
     <None Include="Assets\VRScenes\Fonts\LICENSE.txt" />
     <None Include="Assets\VRScenes\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\VRScenes\Shaders\SeparableAlpha.shader" />

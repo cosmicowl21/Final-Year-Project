@@ -3,8 +3,10 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Flyer
 {
-    // This script handles getting the laser instances from
-    // the object pool and firing them.
+   /*
+    * This script handles getting the laser instances from
+    * the object pool and firing them.
+    */
     public class FlyerLaserController : MonoBehaviour
     {
         [SerializeField] private VRInput m_VRInput;                     // Reference to the VRInput so when the fire button is pressed it can be handled.
@@ -14,18 +16,18 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private Transform m_LaserSpawnPosRight;
         [SerializeField] private AudioSource m_LaserAudio;              // The audio source that should play firing sounds.
 
+        // all functions called below are from VREyeCaster
 
+        // Once it is enabled call thefunction in VREyeCaster class
         private void OnEnable()
         {
             m_VRInput.OnDown += HandleDown;
         }
-
-
+        // once it is disabled call the function in VREyeCaster
         private void OnDisable()
         {
             m_VRInput.OnDown -= HandleDown;
         }
-
 
         private void HandleDown()
         {
@@ -37,7 +39,6 @@ namespace VRStandardAssets.Flyer
             SpawnLaser(m_LaserSpawnPosLeft);
             SpawnLaser(m_LaserSpawnPosRight);
         }
-
 
         private void SpawnLaser(Transform gunPos)
         {

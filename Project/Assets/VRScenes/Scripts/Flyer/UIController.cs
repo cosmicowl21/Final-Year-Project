@@ -14,20 +14,17 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private Text m_TotalScore;     // The text component used to display the score for this session.
         [SerializeField] private Text m_HighScore;      // The text component used to display the high score.
 
-
         public IEnumerator ShowIntroUI()
         {
             // Interupt any fading the intro UI is already doing and fade in, return when finished.
             yield return StartCoroutine(m_IntroUI.InteruptAndFadeIn());
         }
 
-
         public IEnumerator HideIntroUI()
         {
             // Interupt any fading the outro UI is already doing and fade out, return when finished.
             yield return StartCoroutine(m_IntroUI.InteruptAndFadeOut());
         }
-
 
         public IEnumerator ShowOutroUI()
         {
@@ -38,7 +35,6 @@ namespace VRStandardAssets.Flyer
             // Wait for the outro to fade in.
             yield return StartCoroutine(m_OutroUI.InteruptAndFadeIn());
         }
-
 
         public IEnumerator HideOutroUI()
         {

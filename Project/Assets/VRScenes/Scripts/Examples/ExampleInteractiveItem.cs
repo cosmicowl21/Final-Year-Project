@@ -3,6 +3,8 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Examples
 {
+    // This script is from Unitys Examples 
+
     // This script is a simple example of how an interactive item can
     // be used to change things on gameobjects by handling events.
     public class ExampleInteractiveItem : MonoBehaviour

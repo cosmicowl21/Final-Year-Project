@@ -3,6 +3,7 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Examples
 {
+    // this is from unitys examples 
     // This script shows a simple example of how
     // swipe controls can be handled.
     public class ExampleTouchpad : MonoBehaviour

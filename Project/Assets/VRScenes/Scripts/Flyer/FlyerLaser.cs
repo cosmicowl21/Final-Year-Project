@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using VRStandardAssets.Utils;
-
 namespace VRStandardAssets.Flyer
 {
     // This script controls the behaviour of each laser instance.
@@ -10,25 +9,24 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private float m_Speed = 500f;              // The speed each laser moves forward at.
         [SerializeField] private float m_LaserLifeDuration = 3f;    // How long the laser lasts before it's returned to it's object pool.
 
-
         private Rigidbody m_RigidBody;                              // Reference to the rigidbody of the laser.
         private bool m_Hit;                                         // Whether the laser has hit something.
 
-
-        public ObjectPool ObjectPool { private get; set; }          // The object pool the laser belongs to.
-
+        public ObjectPool ObjectPool
+        {
+            private get;    // The object pool the laser belongs to.
+            set;
+        }          
 
         private void Awake()
         {
             m_RigidBody = GetComponent<Rigidbody>();
         }
 
-
         private void Update()
         {
             m_RigidBody.MovePosition(m_RigidBody.position + transform.forward * m_Speed * Time.deltaTime);
         }
-
 
         private void OnTriggerEnter(Collider other)
         {
@@ -49,7 +47,6 @@ namespace VRStandardAssets.Flyer
             ObjectPool.ReturnGameObjectToPool(gameObject);
         }
 
-
         private IEnumerator Timeout()
         {
             // Wait for the life time of the laser.
@@ -59,7 +56,6 @@ namespace VRStandardAssets.Flyer
             if(!m_Hit)
 			    ObjectPool.ReturnGameObjectToPool (gameObject);
         }
-
 
         public void Restart()
         {

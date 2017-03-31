@@ -4,9 +4,11 @@ using System.Collections;
 
 namespace VRStandardAssets.Utils
 {
-    // This class is used to fade in and out groups of UI
-    // elements.  It contains a variety of functions for
-    // fading in different ways.
+   /*
+    *This class is used to fade in and out groups of UI
+    *elements. It contains a variety of functions for
+    * fading in different ways.
+    */
     public class UIFader : MonoBehaviour
     {
         public event Action OnFadeInComplete;                   // This event is triggered when the UI elements have finished fading in.

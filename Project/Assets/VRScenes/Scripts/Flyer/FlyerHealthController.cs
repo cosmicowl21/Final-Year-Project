@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Flyer
 {
+    // This class deals with the players health
     public class FlyerHealthController : MonoBehaviour
     {
         [SerializeField] private float m_StartingHealth = 100f;         // The amount of health the flyer starts with.
@@ -15,16 +16,19 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private Renderer[] m_FlyerRenderers;           // All the renderers for the flyer (to be turned off on death).
         [SerializeField] private Collider[] m_FlyerColliders;           // All the colliders for the flyer (to be turned off on death).
 
-
         private float m_CurrentHealth;                                  // How much health the flyer currently has.
         private bool m_IsDead;                                          // Whether the flyer is currently dead.
 
-
         private const float k_WaitForExplosion = 3f;                    // How long to wait for the explosion to finish before destroying it.
 
-
-        public bool IsDead { get { return m_IsDead; } }
-
+        public bool IsDead
+        {
+            get
+            {
+                return
+                    m_IsDead;
+            }
+        }
 
         public void StartGame ()
         {
@@ -37,13 +41,11 @@ namespace VRStandardAssets.Flyer
             m_HealthBar.fillAmount = 1f;
         }
 
-
         public void StopGame ()
         {
             // Turn all the visual and physical components of the flyer off.
             ShowFlyer (false);
         }
-
 
         private void ShowFlyer(bool show)
         {
@@ -70,7 +72,6 @@ namespace VRStandardAssets.Flyer
                 m_ThrusterAudio.Stop();
         }
 
-
         public void TakeDamage(int damage)
         {
             // If the flyer is already dead no need to do anything.
@@ -91,7 +92,6 @@ namespace VRStandardAssets.Flyer
                 StartCoroutine(DestroyFlyer());
             }
         }
-
 
         private IEnumerator DestroyFlyer()
         {

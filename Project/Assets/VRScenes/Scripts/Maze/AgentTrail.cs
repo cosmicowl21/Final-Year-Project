@@ -4,16 +4,16 @@ using UnityEngine.AI;
 
 namespace VRStandardAssets.Maze
 {
-    // This script simply shows the path of the
-    // NavMeshAgent in the maze scene.
+   /*
+    * This script simply shows the path of the
+    * NavMeshAgent in the maze scene.
+    */
     public class AgentTrail : MonoBehaviour
     {
         [SerializeField] private NavMeshAgent m_Agent;  // Reference to the nav mesh agent who's path will be drawn.
         [SerializeField] private LineRenderer m_Line;   // Reference to the line renderer used to draw the path.
 
-
         private const float k_PathDelay = 0.3f;         // NavMeshAgents need a small delay before they are ready with a path.
-
 
         private void Update()
         {
@@ -25,13 +25,11 @@ namespace VRStandardAssets.Maze
             m_Line.enabled = false;
         }
 
-
         public void SetDestination()
         {
             // When the destination is set, update the path that is drawn.
             StartCoroutine(UpdatePath());
         }
-
 
         private IEnumerator UpdatePath()
         {

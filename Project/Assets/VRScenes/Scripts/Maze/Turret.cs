@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace VRStandardAssets.Maze
 {
-    // This script is used to control the gun
-    // turret that prevents the character escaping
-    // the maze.  It must be turned off by the
-    // player using the switch.
+   /*
+    * This script is used to control the gun
+    * turret that prevents the character escaping
+    * the maze. It must be turned off by the
+    * player using the switch.
+    */
     public class Turret : MonoBehaviour
     {
         [SerializeField] private float m_BarrelSpinSpeed = 1000f;   // The barrel of the gun is rotated manually, this is its speed.
@@ -27,19 +29,15 @@ namespace VRStandardAssets.Maze
         [SerializeField] private AudioClip m_PowerUpClip;           // The clip of the turret powering up.
         [SerializeField] private AudioClip m_PowerDownClip;         // The clip of the turret powering down.
 
-
         private bool m_PlayerInSight;                               // Whether the player is currently in sight.
         private bool m_Firing;                                      // Whether the gun is currently firing.
         private float m_AimTimer;                                   // A normalised time used to smooth between animation and manually aiming at the player.
         private bool m_IsTurretActive;                              // Whether the turret is currently powered up.
 
-
         private readonly int m_HashPowerUpPara = Animator.StringToHash("PowerUp");          // Used to reference the different animator parameters.
         private readonly int m_HashPowerDownPara = Animator.StringToHash ("PowerDown");
 
-
         private const float k_PowerUpWaitTime = 2.033f;             // The amount of time it takes for the turret to power up (based on the animation).
-
 
         private void AimAtPlayer()
         {
@@ -70,13 +68,11 @@ namespace VRStandardAssets.Maze
             m_PlayerInSight &= !m_Player.Dead;
         }
 
-
         public void Activate()
         {
             // When the turret is activated start it powering up.
             StartCoroutine (PowerUp ());
         }
-
 
         public void Deactivate()
         {
@@ -84,7 +80,6 @@ namespace VRStandardAssets.Maze
             m_IsTurretActive = false;
             m_AimTimer = 0f;
         }
-
 
         private IEnumerator PowerUp ()
         {
@@ -105,8 +100,7 @@ namespace VRStandardAssets.Maze
             // Start a loop that lasts whilst the turret is active.
             StartCoroutine (ActiveLoop ());
         }
-
-        
+     
         private IEnumerator ActiveLoop()
         {
             // The turret's transforms should not be controlled by the animator whilst aiming at the player.
@@ -141,7 +135,6 @@ namespace VRStandardAssets.Maze
             PowerDown();
         }
 
-
         private IEnumerator SpinUpAndFire ()
         {
             // Set firing to true so this coroutine is only started once.
@@ -173,7 +166,6 @@ namespace VRStandardAssets.Maze
             }
         }
 
-
         private IEnumerator SpinDown ()
         {
             // The player is no longer in sight but the turret is firing so it should stop.
@@ -203,7 +195,6 @@ namespace VRStandardAssets.Maze
                 yield return null;
             }
         }
-
 
         private void PowerDown ()
         {

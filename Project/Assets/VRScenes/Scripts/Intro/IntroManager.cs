@@ -4,10 +4,12 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Intro
 {
-    // The intro scene takes users through the basics
-    // of interacting through VR in the other scenes.
-    // This manager controls the steps of the intro
-    // scene.
+    /*
+     * The intro scene takes users through the basics
+     * of interacting through VR in the other scenes.
+     * This manager controls the steps of the intro
+     * scene.
+     */
     public class IntroManager : MonoBehaviour
     {
         [SerializeField] private Reticle m_Reticle;                         // The scene only uses SelectionSliders so the reticle should be shown.
@@ -18,11 +20,10 @@ namespace VRStandardAssets.Intro
         [SerializeField] private SelectionSlider m_HowToUseConfirmSlider;   // They demonstrate this using this slider.
         [SerializeField] private UIFader m_ReturnFader;                     // The final instructions are controlled using this fader.
 
-
+        // When the game starts 
         private IEnumerator Start ()
         {
             m_Reticle.Show ();
-            
             m_Radial.Hide ();
 
             // In order, fade in the UI on how to use sliders, wait for the slider to be filled then fade out the UI.

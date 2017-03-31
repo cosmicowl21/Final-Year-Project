@@ -19,7 +19,6 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private Transform m_CameraContainer;       // Reference to the transform containing the camera.
         [SerializeField] private Text m_CurrentScore;               // Reference to the Text component that will display the user's score.
 
-
         private bool m_IsGameRunning;                               // Whether the game is running.
         private Vector3 m_FlyerStartPos;                            // These positions and rotations are stored at Start so the flyer can be reset each game.
         private Quaternion m_FlyerStartRot;
@@ -27,10 +26,8 @@ namespace VRStandardAssets.Flyer
         private Quaternion m_TargetMarkerStartRot;
         private Vector3 m_CameraContainerStartPos;
 
-
         private const float k_ExpDampingCoef = -20f;                // The coefficient used to damp the movement of the flyer.
         private const float k_BankingCoef = 3f;                     // How much the ship banks when it moves.
-
 
         private void Start ()
         {
@@ -42,7 +39,6 @@ namespace VRStandardAssets.Flyer
             m_CameraContainerStartPos = m_CameraContainer.position;
         }
 
-
         public void StartGame ()
         {
             // The game is now running.
@@ -51,7 +47,6 @@ namespace VRStandardAssets.Flyer
             // Start the flyer moving.
             StartCoroutine (MoveFlyer ());
         }
-
 
         public void StopGame ()
         {
@@ -65,7 +60,6 @@ namespace VRStandardAssets.Flyer
             m_TargetMarker.rotation = m_TargetMarkerStartRot;
             m_CameraContainer.position = m_CameraContainerStartPos;
         }
-
 
         private IEnumerator MoveFlyer ()
         {

@@ -5,9 +5,11 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Maze
 {
-    // This is the game controller for the maze scene.
-    // It manages turning things on and off during the
-    // different phases of the game.
+    /*
+     * This is the game controller for the maze scene.
+     * It manages turning things on and off during the
+     * different phases of the game.
+     */
     public class MazeGameController : MonoBehaviour
     {
         [SerializeField] private SelectionSlider m_SelectionSlider;         // This is the selection slider that must be filled to get into the play phase.
@@ -28,27 +30,31 @@ namespace VRStandardAssets.Maze
         [SerializeField] private CameraOrbit m_CameraOrbit;                 // This needs to be reset for each new game.
         [SerializeField] private InputWarnings m_InputWarnings;             // Different warnings need to be displayed at different points through the maze game.
 
-
         private bool m_Playing;                                             // Whether or not the game is currently playing.
         private bool m_Win;                                                 // Whether the player won.
 
+        // return that the game is being played
+        public bool Playing
+        {
+            get
+            {
+                return m_Playing;
+            }
+        }
 
-        public bool Playing { get { return m_Playing; } }
-
-
+        // Once the game starts handle the game starting and the player being shot
         private void OnEnable ()
         {
             m_ExitArea.OnGameComplete += HandleGameComplete;
             m_Player.OnPlayerShot += HandlePlayerShot;
         }
 
-
-        private void OnDisable ()
+        // once the game is over stop handling 
+        private void OnDisable()
         {
             m_ExitArea.OnGameComplete -= HandleGameComplete;
             m_Player.OnPlayerShot -= HandlePlayerShot;
         }
-
 
         private IEnumerator Start()
         {
@@ -63,7 +69,6 @@ namespace VRStandardAssets.Maze
                 yield return StartCoroutine(EndPhase());
             }
         }
-
 
         private IEnumerator StartPhase ()
         {
@@ -86,7 +91,6 @@ namespace VRStandardAssets.Maze
             // Wait for the instructions to fade out.
             yield return StartCoroutine (m_InstructionsFader.InteruptAndFadeOut ());
         }
-
 
         private IEnumerator PlayPhase()
         {
@@ -111,7 +115,6 @@ namespace VRStandardAssets.Maze
             // Turn tap warnings back off.
             m_InputWarnings.TurnOffSingleTapWarnings ();
         }
-
 
         private IEnumerator EndPhase()
         {
@@ -170,7 +173,6 @@ namespace VRStandardAssets.Maze
             yield return StartCoroutine(m_CameraFade.BeginFadeIn(true));
         }
 
-
         private void Restart()
         {
             // Restart everything so it's ready for the start of the game.
@@ -183,14 +185,12 @@ namespace VRStandardAssets.Maze
             m_DestinationMarker.Restart();
         }
         
-
         private void HandlePlayerShot()
         {
             // If the player is shot the game is no longer playing and the player didn't win.
             m_Playing = false;
             m_Win = false;
         }
-
 
         private void HandleGameComplete()
         {

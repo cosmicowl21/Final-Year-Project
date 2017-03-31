@@ -9,7 +9,6 @@ namespace VRStandardAssets.Flyer
     {
         public event Action<AsteroidExplosion> OnExplosionEnded;    // This event is triggered after the last particle system has finished.
 
-
         private ParticleSystem[] m_ParticleSystems;                 // The particle systems for the explosion and their children.
         private float m_Duration;                                   // The longest duration of all the particle systems.
 
@@ -30,13 +29,11 @@ namespace VRStandardAssets.Flyer
             }
         }
 
-
         private void OnDestroy()
         {
             // Ensure the event is completely unsubscribed when the explosion is destroyed.
             OnExplosionEnded = null;
         }
-
 
         public void Restart()
         {
@@ -50,7 +47,6 @@ namespace VRStandardAssets.Flyer
             // Start the time out.
             StartCoroutine (Timeout ());
         }
-
 
         private IEnumerator Timeout()
         {

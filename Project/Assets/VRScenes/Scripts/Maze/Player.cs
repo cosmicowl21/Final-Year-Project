@@ -5,23 +5,23 @@ using UnityEngine.AI;
 
 namespace VRStandardAssets.Maze
 {
-    // The other scripts on the player character in the maze
-    // scene are from Unity's Standard Assets.  This script is
-    // designed to work with them to control the specifics of
-    // the character for the maze scene such as the player being
-    // shot and celebrating.
+    /*
+     * The other scripts on the player character in the maze
+     * scene are from Unity's Standard Assets.  This script is
+     * designed to work with them to control the specifics of
+     * the character for the maze scene such as the player being
+     * shot and celebrating.
+     */
     public class Player : MonoBehaviour
     {
         public event Action OnPlayerShot;                                               // This event is triggered when the player is shot.
-
 
         [SerializeField] private MazeTargetSetting m_MazeTargetSetting;                 // This triggers an event when the target is set. 
         [SerializeField] private AgentTrail m_AgentTrail;                               // This needs to know when a target has been set.
         [SerializeField] private AudioSource m_PlayerAudio;                             // The audio source that plays the sounds of the player.
         [SerializeField] private AudioClip m_PlayerHitClip;                             // The sound to play as the player is shot.
         [SerializeField] private AudioClip m_PlayerDieClip;                             // The sound to play when the player dies.
-        
-        
+             
         private NavMeshAgent m_Agent;                                                   // Needs to be used to reset the character's position and stop the player.
         private AICharacterControl m_AiCharacter;                                       // Used to actually set the destination of the player.
         private Animator m_Animator;                                                    // Used to trigger various states playing.
@@ -31,14 +31,11 @@ namespace VRStandardAssets.Maze
         private bool m_IsGameOver;                                                      // Whether the game is complete.
         private Vector3 m_OriginPosition;                                               // The position the player should move to at the start.
 
-
         private readonly int m_HashResetPara = Animator.StringToHash ("Reset");         // Used to trigger a reset of the player's animation.
         private readonly int m_HashDyingPara = Animator.StringToHash ("Dying");         // Used to trigger the animation of the player dying when shot.
         private readonly int m_HashWinningPara = Animator.StringToHash("Winning");      // Used to trigger the animation of the player celebrating when winning.
 
-
         public bool Dead { get { return m_IsDying; } }
-
 
         private void Awake()
         {
@@ -53,18 +50,16 @@ namespace VRStandardAssets.Maze
             m_OriginPosition = transform.position;
         }
 
-
+        // once the path has been triggerd handle it
         private void OnEnable ()
         {
             m_MazeTargetSetting.OnTargetSet += HandleSetTarget;
         }
 
-
         private void OnDisable()
         {
             m_MazeTargetSetting.OnTargetSet -= HandleSetTarget;
         }
-
 
         public void Restart()
         {
@@ -86,7 +81,6 @@ namespace VRStandardAssets.Maze
             m_IsGameOver = false;
         }
 
-
         public void GameComplete()
         {
             // To make sure this can only be called once, check if the game is already over.
@@ -103,7 +97,6 @@ namespace VRStandardAssets.Maze
             m_Animator.SetTrigger(m_HashWinningPara);
         }
 
-
         public void TurretHit()
         {
             // To make sure this is only called once, check if the player is already dying.
@@ -116,7 +109,6 @@ namespace VRStandardAssets.Maze
             // Start the player dying.
             StartCoroutine(DyingSequence());
         }
-
 
         private IEnumerator DyingSequence()
         {
@@ -142,7 +134,6 @@ namespace VRStandardAssets.Maze
                 OnPlayerShot();
         }
 
-
         private IEnumerator PlayClipAndWait (AudioClip clip)
         {
             // Set the audio to be the given clip and play it.
@@ -152,7 +143,6 @@ namespace VRStandardAssets.Maze
             // Return after the clip has finished.
             yield return new WaitForSeconds (clip.length);
         }
-
 
         private void HandleSetTarget(Transform target)
         {

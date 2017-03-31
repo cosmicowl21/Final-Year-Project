@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 
 namespace VRStandardAssets.Utils
 {
-    // This class is used to fade the entire screen to black (or
-    // any chosen colour).  It should be used to smooth out the
-    // transition between scenes or restarting of a scene.
+   /*
+    * This class is used to fade the entire screen to black (or
+    * any chosen colour).  It should be used to smooth out the
+    * transition between scenes or restarting of a scene.
+    */
     public class VRCameraFade : MonoBehaviour
     {
         public event Action OnFadeComplete;                             // This is called when the fade in or out has finished.

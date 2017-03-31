@@ -3,10 +3,12 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Menu
 {
-    // In the main menu, a thin bar is shown below each
-    // of the scene options.  The bar moves to below
-    // whichever option the user is currently looking at.
-    // This script moves the bar.
+   /*
+    * In the main menu, a thin bar is shown below each
+    * of the scene options.  The bar moves to below
+    * whichever option the user is currently looking at.
+    * This script moves the bar.
+    */
     public class MenuSelectorMover : MonoBehaviour
     {
         [SerializeField] private float m_PopSpeed = 8f;         // How fast the bar pops in and out.
@@ -16,12 +18,10 @@ namespace VRStandardAssets.Menu
         [SerializeField] private Transform m_ChildTransform;    // The child object in the selector hierarchy, this has a mesh renderer to display the bar.
         [SerializeField] private VRInteractiveItem[] m_Items;   // The VRInteractiveItems that the user can look at to move the selector.
 
-
         private Quaternion m_TargetRotation;                    // The rotation that the selector is trying to reach.
         private Vector3 m_StartPosition;                        // The local position of the child transform at the start.
         private Vector3 m_PoppedPosition;                       // The local position of the child transform when it's popped out.
         private Vector3 m_TargetPosition;                       // The local position the child transform is trying to reach.
-
 
         void Awake ()
         {
@@ -31,8 +31,7 @@ namespace VRStandardAssets.Menu
             // Calculate the popped position.
             m_PoppedPosition = m_ChildTransform.localPosition - Vector3.forward * m_PopDistance;
         }
-
-	    
+   
         void Update ()
         {
             // By default the target position of the child transform is unpopped.

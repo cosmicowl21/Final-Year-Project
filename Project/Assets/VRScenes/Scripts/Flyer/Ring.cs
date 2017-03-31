@@ -5,30 +5,27 @@ using VRStandardAssets.Common;
 
 namespace VRStandardAssets.Flyer
 {
-    // This script handles the behaviour of the gates
-    // in the flyer scene including changing their colour
-    // and adding to the player's score.
+   /*
+    * This script handles the behaviour of the rings
+    * in the flyer scene including changing their colour
+    * and adding to the player's score.
+    */
     public class Ring : MonoBehaviour
     {
         public event Action<Ring> OnRingRemove;
         
-
         [SerializeField] private int m_Score = 100;                         // The amount added to the player's score when the ring is activated.
         [SerializeField] private AudioSource m_AudioSource;                 // Reference to the audio source that plays a clip when the player activates the ring.
         [SerializeField] private Color m_BaseColor = Color.blue;            // The colour the ring is by defalt.
         [SerializeField] private Color m_ShipAlignedColor = Color.yellow;   // The colour the ring is when the ship is aligned with it.
         [SerializeField] private Color m_ActivatedColor = Color.green;      // The colour the ring is when it has been activated.
 
-
         private bool m_HasTriggered;
         private Transform m_Cam;
         private GameObject m_Flyer;
         private List<Material> m_Materials;
         private bool m_ShipAligned;
-
-
         private const float k_RemovalDistance = 50f;
-
 
         // This property is used choose a colour for the ring based on the flyer's alignment.
         public bool ShipAligned
@@ -48,7 +45,6 @@ namespace VRStandardAssets.Flyer
             get { return m_ShipAligned; }
         }
 
-
         private void Awake()
         {
             // Create a list of materials and add the main material on each child renderer to it.
@@ -65,7 +61,6 @@ namespace VRStandardAssets.Flyer
             m_Flyer = GameObject.FindGameObjectWithTag ("Player");
         }
 
-
         private void Update()
         {
             // If the ring is far enough behind the camera and something is subscribed to OnRingRemove call it.
@@ -73,7 +68,6 @@ namespace VRStandardAssets.Flyer
                 if (OnRingRemove != null)
                     OnRingRemove(this);
         }
-
 
         private void OnTriggerEnter(Collider other)
         {
@@ -94,13 +88,11 @@ namespace VRStandardAssets.Flyer
             SetRingColour (m_ActivatedColor);
         }
 
-
         private void OnDestroy()
         {
             // Ensure the event is completely unsubscribed when the ring is destroyed.
             OnRingRemove = null;
         }
-
 
         public void Restart()
         {

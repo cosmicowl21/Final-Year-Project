@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Utils
 {
-    // This class works similarly to the SelectionRadial class except
-    // it has a physical manifestation in the scene.  This can be
-    // either a UI slider or a mesh with the SlidingUV shader.  The
-    // functions as a bar that fills up whilst the user looks at it
-    // and holds down the Fire1 button.
+    /*
+    * This class works similarly to the SelectionRadial class except
+    * it has a physical manifestation in the scene.  This can be
+    * either a UI slider or a mesh with the SlidingUV shader.  The
+    *functions as a bar that fills up whilst the user looks at it
+    * and holds down the Fire1 button.
+    */
     public class SelectionSlider : MonoBehaviour
     {
         public event Action OnBarFilled;                                    // This event is triggered when the bar finishes filling.

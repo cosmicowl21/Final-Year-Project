@@ -3,26 +3,24 @@ using UnityEngine;
 
 namespace VRStandardAssets.Maze
 {
-    // This script controls what happens when
-    // the character reaches the exit of the maze.
+    /*
+     * This script controls what happens when
+     * the character reaches the exit section of the maze
+     */
     public class ExitArea : MonoBehaviour
     {
         public event Action OnGameComplete;                     // This event is called when the the player reaches the exit area for the first time.
 
-
         [SerializeField] private Transform m_PlayerTransform;   // Reference to the character in the scene to determine what has entered the trigger.
-
 
         private Player m_Player;                                // Reference to the Player script so the player knows when the game is complete.
         private bool m_IsShowingGameOver;                       // To make sure the gameover event is only called once.
-
 
         private void Awake ()
         {
             // Find the Player component from the player's transform.
             m_Player = m_PlayerTransform.GetComponent<Player> ();
         }
-
 
         private void OnTriggerEnter(Collider other)
         {
@@ -35,13 +33,11 @@ namespace VRStandardAssets.Maze
             ShowGameOver();
         }
 
-
         public void Restart()
         {
             // When the game restarts the game is no longer over.
             m_IsShowingGameOver = false;
         }
-
 
         private void ShowGameOver()
         {

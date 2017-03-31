@@ -9,7 +9,7 @@ namespace UnityStandardAssets.Effects
 
         public float multiplier = 1;
 
-
+        // When the game starts get the particle system form within unity 
         private void Start()
         {
             var systems = GetComponentsInChildren<ParticleSystem>();

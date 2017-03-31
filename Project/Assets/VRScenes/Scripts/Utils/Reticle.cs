@@ -3,10 +3,12 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Utils
 {
-    // The reticle is a small point at the centre of the screen.
-    // It is used as a visual aid for aiming. The position of the
-    // reticle is either at a default position in space or on the
-    // surface of a VRInteractiveItem as determined by the VREyeRaycaster.
+   /*
+    * The reticle is a small point at the centre of the screen.
+    * It is used as a visual aid for aiming. The position of the
+    * reticle is either at a default position in space or on the
+    * surface of a VRInteractiveItem as determined by the VREyeRaycaster.
+    */
     public class Reticle : MonoBehaviour
     {
         [SerializeField] private float m_DefaultDistance = 5f;      // The default distance away from the camera the reticle is placed.

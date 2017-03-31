@@ -4,21 +4,23 @@ using VRStandardAssets.Utils;
 
 namespace VRStandardAssets.Maze
 {
-    // In the maze scene, the camera rotates around
-    // the maze in response to the user swiping.  This
-    // class handles how the camera moves in response
-    // to the swipe.  This script is placed on a parent
-    // of the camera such that the camera pivots around
-    // as this gameobject is rotated.
+    /*
+     *In the maze scene, the camera rotates around
+     *the maze in response to the user swiping.  This
+     *class handles how the camera moves in response
+     *to the swipe.  This script is placed on a parent
+     *of the camera such that the camera pivots around
+     *as this gameobject is rotated.
+     */
     public class CameraOrbit : MonoBehaviour
     {
         // This enum represents the way in which the camera will rotate around the maze.
         public enum OrbitStyle
         {
-            Smooth, Step, StepWithFade,
+            Smooth,
+            Step,
+            StepWithFade,
         }
-
-
         [SerializeField] private OrbitStyle m_OrbitStyle;
         [SerializeField] private float m_RotationIncrement = 45f;           // The amount the camera rotates in response to a swipe.
         [SerializeField] private float m_RotationFadeDuration = 0.2f;       // If fading is enabled, this is the duration of the the fade.
@@ -27,9 +29,7 @@ namespace VRStandardAssets.Maze
         [SerializeField] private MazeGameController m_MazeGameController;   // Reference to the game controller so swiping will only be handled while the game is playing.
         [SerializeField] private Rigidbody m_Rigidbody;                     // Reference to the camera's rigidbody.
 
-
         private Quaternion m_StartRotation;                                 // The rotation of the camera at the start of the scene, used for reseting.
-
 
         private void Awake ()
         {
@@ -37,19 +37,16 @@ namespace VRStandardAssets.Maze
             m_StartRotation = m_Rigidbody.rotation;
         }
 
-
         private void OnEnable ()
         {
             m_VrInput.OnSwipe += HandleSwipe;
         }
-
 
         private void OnDisable ()
         {
             m_VrInput.OnSwipe -= HandleSwipe;
         }
 
-      
         private void HandleSwipe(VRInput.SwipeDirection swipeDirection)
         {
             // If the game isn't playing or the camera is fading, return and don't handle the swipe.
@@ -71,8 +68,7 @@ namespace VRStandardAssets.Maze
                     break;
             }
         }
-
-       
+    
         private IEnumerator RotateCamera(float increment)
         {
             // Determine how the camera should rotate base on it's orbit style.
@@ -96,7 +92,6 @@ namespace VRStandardAssets.Maze
                     break;
             }
         }
-
 
         public void Restart ()
         {

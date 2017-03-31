@@ -3,6 +3,8 @@ using UnityEngine.VR;
 
 namespace VRStandardAssets.Examples
 {
+    // This is from unitys Examples
+
     // This script shows how gameobjects can react to
     // the rotation of the user's head.  It tilts the
     // gameobject's transform so it's front edge is 

@@ -3,6 +3,8 @@ using UnityEngine.VR;
 
 namespace VRStandardAssets.Examples
 {
+    // This script is from Unitys examples
+
     // This script shows how renderscale affects the visuals
     // and performance of a scene.
     public class ExampleRenderScale : MonoBehaviour

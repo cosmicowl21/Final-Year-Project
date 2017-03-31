@@ -4,34 +4,32 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Utils
 {
-    // This script is used to show messages when the user
-    // seems to be using the wrong type of input.
+   /*
+    * This script is used to show messages when the user
+    * seems to be using the wrong type of input.
+    */
     public class InputWarnings : MonoBehaviour
     {
-        [SerializeField] private float m_WarningDisplayTime = 2f;                       // How long the warning is displayed for.
-        [SerializeField] private bool m_ShowDoubleTapWarnings;                          // Whether to show warnings by default when the user double taps.
-        [SerializeField] private string m_DoubleTapWarningMessage = "HOLD, DON'T TAP!"; // The message to display when the user uses a double tap when they shouldn't.
-        [SerializeField] private bool m_ShowSingleTapWarnings;                          // Whether to show warnings by default when the user taps.
-        [SerializeField] private string m_SingleTapWarningMessage = "HOLD, DON'T TAP!"; // The message to display when the user taps when they shouldn't.
-        [SerializeField] private Text m_WarningText;                                    // Reference to the Text component that will hold the messages.
-        [SerializeField] private Image m_BackgroundImage;                               // Reference to the image that makes the background for the warning.
-        [SerializeField] private Transform m_TextTransform;                             // Reference to the transform of the Text component, used to move the warning to the location of the click.
-        [SerializeField] private Transform m_Camera;                                    // Reference to the camera's transform so the text knows which way to face.
-        [SerializeField] private Reticle m_Reticle;                                     // Reference to the reticle in order to set the position of the warning.
-        [SerializeField] private VRInput m_VRInput;                                     // Reference to the VRInput to detect input.
+        [SerializeField] private float m_WarningDisplayTime = 2f;                                    // How long the warning is displayed for.
+        [SerializeField] private bool m_ShowDoubleTapWarnings;                                      // Whether to show warnings by default when the user double taps.
+        [SerializeField] private string m_DoubleTapWarningMessage = "PLEASE HOLD, DON'T TAP!";     // The message to display when the user uses a double tap when they shouldn't.
+        [SerializeField] private bool m_ShowSingleTapWarnings;                                    // Whether to show warnings by default when the user taps.
+        [SerializeField] private string m_SingleTapWarningMessage = "PLEASE HOLD, DON'T TAP!";   // The message to display when the user taps when they shouldn't.
+        [SerializeField] private Text m_WarningText;                                            // Reference to the Text component that will hold the messages.
+        [SerializeField] private Image m_BackgroundImage;                                      // Reference to the image that makes the background for the warning.
+        [SerializeField] private Transform m_TextTransform;                                   // Reference to the transform of the Text component, used to move the warning to the location of the click.
+        [SerializeField] private Transform m_Camera;                                         // Reference to the camera's transform so the text knows which way to face.
+        [SerializeField] private Reticle m_Reticle;                                         // Reference to the reticle in order to set the position of the warning.
+        [SerializeField] private VRInput m_VRInput;                                        // Reference to the VRInput to detect input.
 
-
-        private Coroutine m_WarningCoroutine;                                           // Reference to the coroutine that displays the warning message so it can be stopped prematurely.
+        private Coroutine m_WarningCoroutine;                                            // Reference to the coroutine that displays the warning message so it can be stopped prematurely.
         private Coroutine m_SingleClickDelayCoroutine;                                  // It isn't clear whether a click will be a double for a short time, this delays the check.
-        private bool m_DisplayingWarning;                                               // Whether the warning is currently being displayed.
-        private VRInput.SwipeDirection m_CurrentSwipe;                                  // The swipe being used this frame, this is used to determine whether a click is a swipe.
-        private float m_DownTime;                                                       // This is used to determine whether a click is actually a hold.
-        private Vector3 m_WarningPosition;                                              // The position that the warning should stick to.
-        private float m_ScaleMultiplier;                                                // The warning needs to have an appropriate size based on the Reticle's scale.
-
-
-        private const float k_ClickIsHoldTime = 0.5f;                                   // How long Fire1 has to be down to be considered a hold.
-
+        private bool m_DisplayingWarning;                                              // Whether the warning is currently being displayed.
+        private VRInput.SwipeDirection m_CurrentSwipe;                                // The swipe being used this frame, this is used to determine whether a click is a swipe.
+        private float m_DownTime;                                                    // This is used to determine whether a click is actually a hold.
+        private Vector3 m_WarningPosition;                                          // The position that the warning should stick to.
+        private float m_ScaleMultiplier;                                           // The warning needs to have an appropriate size based on the Reticle's scale.
+        private const float k_ClickIsHoldTime = 0.5f;                             // How long Fire1 has to be down to be considered a hold.
 
         private void Awake()
         {
@@ -43,7 +41,6 @@ namespace VRStandardAssets.Utils
             m_BackgroundImage.enabled = false;
         }
 
-
         private void OnEnable ()
         {
             m_VRInput.OnDoubleClick += HandleDoubleClick;
@@ -52,7 +49,6 @@ namespace VRStandardAssets.Utils
             m_VRInput.OnDown += HandleDown;
         }
 
-
         private void OnDisable ()
         {
             m_VRInput.OnDoubleClick -= HandleDoubleClick;
@@ -60,7 +56,6 @@ namespace VRStandardAssets.Utils
             m_VRInput.OnSwipe -= HandleSwipe;
             m_VRInput.OnDown -= HandleDown;
         }
-
 
         private void HandleDoubleClick ()
         {
@@ -73,7 +68,6 @@ namespace VRStandardAssets.Utils
                 m_WarningCoroutine = StartCoroutine (DisplayWarning (m_DoubleTapWarningMessage));
         }
 
-
         private void HandleClick ()
         {
             // If the difference in time between now and the time when the button went down is greater than the constant, it's a 'hold' so return.
@@ -85,20 +79,17 @@ namespace VRStandardAssets.Utils
                 m_SingleClickDelayCoroutine = StartCoroutine(SingleClickCheckDelay ());
         }
 
-
         private void HandleSwipe (VRInput.SwipeDirection swipe)
         {
             // Store the swipe this frame.
             m_CurrentSwipe = swipe;
         }
 
-
         private void HandleDown ()
         {
             // Store the time when the button is pressed.
             m_DownTime = Time.time;
         }
-
 
         private IEnumerator SingleClickCheckDelay ()
         {
@@ -108,7 +99,6 @@ namespace VRStandardAssets.Utils
             // If this coroutine hasn't been stopped by another HandleClick function then display the single tap warning message.
             m_WarningCoroutine = StartCoroutine (DisplayWarning (m_SingleTapWarningMessage));
         }
-
 
         private IEnumerator DisplayWarning (string message)
         {
@@ -143,7 +133,6 @@ namespace VRStandardAssets.Utils
             m_DisplayingWarning = false;
         }
 
-
         public void TurnOnDoubleTapWarnings ()
         {
             // If double tap warnings are already being shown nothing needs to be done so return.
@@ -161,13 +150,11 @@ namespace VRStandardAssets.Utils
             m_WarningText.text = string.Empty;
         }
 
-
         public void TurnOffDoubleTapWarnings ()
         {
             // No longer show double tap warnings.
             m_ShowDoubleTapWarnings = false;
         }
-
 
         public void TurnOnSingleTapWarnings ()
         {
@@ -185,7 +172,6 @@ namespace VRStandardAssets.Utils
             // Set the component to display nothing.
             m_WarningText.text = string.Empty;
         }
-
 
         public void TurnOffSingleTapWarnings ()
         {

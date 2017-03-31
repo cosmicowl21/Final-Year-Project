@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace UnityStandardAssets.Effects
 {
+    // this class deals with the physics behind the asteroids
     public class ExplosionPhysicsForce : MonoBehaviour
     {
         public float explosionForce = 4;
-
 
         private IEnumerator Start()
         {

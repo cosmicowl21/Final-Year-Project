@@ -3,13 +3,15 @@ using UnityEngine.UI;
 
 namespace VRStandardAssets.Utils
 {
-    // This is a simple script to tint UI Images a colour when
-    // a VRInteractiveItem is looked at.  Note that the Images
-    // to tint don't have to be on the same gameobject as the
-    // VRInteractiveItem but the user will be looking at the
-    // VRInteractiveItem when the Images are tinted.
-    // Also note that this should be used to tint/highlight
-    // images, not change their colour entirely.
+    /*
+    * This is a simple script to tint UI Images a colour when
+    * a VRInteractiveItem is looked at.  Note that the Images
+    * to tint don't have to be on the same gameobject as the
+    * VRInteractiveItem but the user will be looking at the
+    * VRInteractiveItem when the Images are tinted.
+    * Also note that this should be used to tint/highlight
+    * images, not change their colour entirely.
+    */
     public class UITint : MonoBehaviour
     {
         [SerializeField] private Color m_Tint;                                  // The colour to tint the Images.

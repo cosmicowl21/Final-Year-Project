@@ -11,7 +11,6 @@ namespace VRStandardAssets.Flyer
         public event Action<Asteroid> OnAsteroidRemovalDistance;    // This event is triggered when it is far enough behind the camera to be removed.
         public event Action<Asteroid> OnAsteroidHit;                // This event is triggered when the asteroid is hit either the ship or a laser. 
 
-
         [SerializeField] private float m_AsteroidMinSize = 10f;     // The minimum amount an asteroid can be scaled up.
         [SerializeField] private float m_AsteroidMaxSize = 20f;     // The maximum amount an asteroid can be scaled up.
         [SerializeField] private float m_MinSpeed = 0f;             // The minimum speed the asteroid will move towards the camera.
@@ -21,7 +20,6 @@ namespace VRStandardAssets.Flyer
         [SerializeField] private int m_PlayerDamage = 20;           // The amount of damage the asteroid will do to the ship if it hits.
         [SerializeField] private int m_Score = 10;                  // The amount added to the score when the asteroid hits either the ship or a laser.
 
-
         private Rigidbody m_RigidBody;                              // Reference to the asteroid's rigidbody, used to move and rotate it.
         private FlyerHealthController m_FlyerHealthController;      // Reference to the flyer's health script, used to damage it.
         private GameObject m_Flyer;                                 // Reference to the flyer itself, used to determine what was hit.
@@ -29,14 +27,10 @@ namespace VRStandardAssets.Flyer
         private float m_Speed;                                      // How fast asteroid will move towards the camera.
         private Vector3 m_RotationAxis;                             // The axis around which the asteroid will rotate.
         private float m_RotationSpeed;                              // How fast the asteroid will rotate.
-
-
         private const float k_RemovalDistance = 50f;                // How far behind the camera the asteroid must be before it is removed.
-
 
         public int Score { get { return m_Score; } }
         
-
         private void Awake ()
         {
             m_RigidBody = GetComponent<Rigidbody>();
@@ -64,7 +58,6 @@ namespace VRStandardAssets.Flyer
             m_RotationAxis = Random.insideUnitSphere;
             m_RotationSpeed = Random.Range (m_MinRotationSpeed, m_MaxRotationSpeed);
         }
-
 
         private void Update()
         {
